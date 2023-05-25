@@ -24,12 +24,12 @@ spring:
             - Path=/ratings/**
 
 
+okta:
+  oauth2:
+    issuer: https://dev-50586774.okta.com/oauth2/default
+    audience: api://default
+    client-id: 0oa9oq0rgxTTCumiX5d7
+    client-secret: 0es8puJzcIiOIB0iuiOEjUUoCh8_5AWmyXwDCIbU
+    scopes: openid, profile, email, offline_access
 
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+

@@ -2,28 +2,7 @@ server:
   port: 1432
 
 spring:
-  datasource:
-    driver-class-name: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1521:xe
-    username: mahesh
-    password: mahesh
-  jpa:
-    properties:
-      hibernate:
-      format-sql: true
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-
   application:
     name: RATING-SERVICE
-
-
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+  config:
+    import: configserver:http://localhost:1435

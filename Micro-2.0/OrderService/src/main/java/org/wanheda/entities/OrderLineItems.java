@@ -15,8 +15,9 @@ public class OrderLineItems {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Long price;
+    private String skuCode;
     private Integer quantity;
     @ManyToOne
+    @JoinColumn(name = "order_id")
     private Order order;
-
 }

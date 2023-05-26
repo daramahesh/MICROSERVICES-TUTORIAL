@@ -1,0 +1,8 @@
+server:
+  port: 1432
+
+spring:
+  application:
+    name: RATING-SERVICE
+  config:
+    import: configserver:http://localhost:1435

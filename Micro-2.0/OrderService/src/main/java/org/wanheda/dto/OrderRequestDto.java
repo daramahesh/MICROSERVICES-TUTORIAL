@@ -12,5 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class OrderRequestDto {
-    private List<OrderLineItemsDto> orderLineItemsDto;
+    private String orderDetails;
+    private Long pid;
 }

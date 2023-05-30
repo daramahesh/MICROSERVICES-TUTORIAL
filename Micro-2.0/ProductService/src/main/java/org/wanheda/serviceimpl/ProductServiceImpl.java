@@ -35,11 +35,17 @@ public class ProductServiceImpl implements ProductService {
         return products.stream().map(this::mapToProductResponse).toList();
     }
 
+    @Override
+    public Product getById(long pid) {
+        return productRepository.findById(String.valueOf(pid)).orElseThrow(()->new NullPointerException());
+    }
+
     private ProductResponseDto mapToProductResponse(Product product) {
         return ProductResponseDto.builder()
                 .pid(product.getPid())
                 .name(product.getName())
                 .price(product.getPrice())
+                .quantity(product.getQuantity())
                 .build();
     }
 }

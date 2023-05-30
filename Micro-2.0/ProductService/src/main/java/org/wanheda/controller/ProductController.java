@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.wanheda.dto.ProductRequestDto;
 import org.wanheda.dto.ProductResponseDto;
+import org.wanheda.entities.Product;
 import org.wanheda.service.ProductService;
 
 import java.util.List;
@@ -27,5 +28,10 @@ public class ProductController {
     @GetMapping
     public List<ProductResponseDto> getAll() {
        return productService.getAll();
+    }
+
+    @GetMapping("/{pid}")
+    public Product getById(@PathVariable("pid") long pid) {
+        return productService.getById(pid);
     }
 }

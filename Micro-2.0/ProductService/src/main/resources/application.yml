@@ -12,5 +12,8 @@ spring:
       hibernate:
       format-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     show-sql: true
+
+  application:
+    name: PRODUCT-SERVICE

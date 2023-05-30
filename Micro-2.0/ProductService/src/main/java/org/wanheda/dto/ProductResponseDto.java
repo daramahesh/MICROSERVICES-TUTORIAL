@@ -13,4 +13,5 @@ public class ProductResponseDto {
     private long pid;
     private String name;
     private long price;
+    private Integer quantity;
 }

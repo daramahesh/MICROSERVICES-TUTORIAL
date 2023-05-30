@@ -10,4 +10,5 @@ import java.util.List;
 public interface ProductService {
     void createProduct(ProductRequestDto productRequestDto);
     List<ProductResponseDto> getAll();
+    Product getById(long pid);
 }

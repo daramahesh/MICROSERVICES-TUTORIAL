@@ -26,12 +26,17 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<ProductResponseDto> getAll() {
+    public List<ProductResponseDto> getAll(@RequestHeader("loggedInUser") String username) {
+        System.out.println("username is " +username);
        return productService.getAll();
     }
 
     @GetMapping("/{pid}")
     public Product getById(@PathVariable("pid") long pid) {
         return productService.getById(pid);
+    }
+    @PutMapping("update/{pid}")
+    public Product update(@PathVariable("pid") long pid) {
+        return productService.update(pid);
     }
 }

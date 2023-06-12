@@ -11,4 +11,5 @@ public interface ProductService {
     void createProduct(ProductRequestDto productRequestDto);
     List<ProductResponseDto> getAll();
     Product getById(long pid);
+    public Product update(Long id);
 }

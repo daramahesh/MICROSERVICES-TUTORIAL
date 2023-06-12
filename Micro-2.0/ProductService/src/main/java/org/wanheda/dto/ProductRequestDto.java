@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class ProductRequestDto {
     private String name;
     private long price;
+    private Integer quantity;
 }

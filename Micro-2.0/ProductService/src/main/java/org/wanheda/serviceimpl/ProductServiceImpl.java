@@ -24,6 +24,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = Product.builder()
                 .name(productRequestDto.getName())
                 .price(productRequestDto.getPrice())
+                .quantity(productRequestDto.getQuantity())
                 .build();
         productRepository.save(product);
         log.info("product {} is saved", product.getPid());
@@ -47,5 +48,15 @@ public class ProductServiceImpl implements ProductService {
                 .price(product.getPrice())
                 .quantity(product.getQuantity())
                 .build();
+    }
+    public Product update(Long id) {
+        Product p=productRepository.findById(String.valueOf(id)).orElseThrow();
+        if(p!=null){
+            int i =p.getQuantity()-1;
+            p.setQuantity(i);
+
+        }
+       return this.productRepository.save(p);
+
     }
 }

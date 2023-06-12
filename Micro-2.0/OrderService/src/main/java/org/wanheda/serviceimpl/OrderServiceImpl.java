@@ -25,16 +25,17 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void placeOrder(OrderRequestDto orderRequestDto) {
 
-        Product[] products = webClient.get().uri("http://localhost:8081/api/products").retrieve().bodyToMono(Product[].class).block();
+        Product[] products = webClient.get().uri("http://PRODUCT-SERVICE/api/products").retrieve().bodyToMono(Product[].class).block();
         assert products != null;
-        List<Product> productList = Arrays.stream(products).toList();
+        List<Product> productList = Arrays.asList(products);
 
         List<Order>list=new ArrayList<>();
-        Order order = new Order();
+
         for (Product p : productList){
 
-            if(p.getName().matches(orderRequestDto.getOrderDetails())&&p.getQuantity()>0){
+            if(p.getName().equals(orderRequestDto.getOrderDetails())&&p.getQuantity()>0){
 
+                Order order = new Order();
                 order.setOrderDetails(p.getName());
                 order.setPid(p.getPid());
                 list.add(order);
@@ -45,6 +46,10 @@ public class OrderServiceImpl implements OrderService {
         }
         else{
             this.orderRepository.saveAll(list);
+            for(Product pp: productList){
+                Object block = webClient.put().uri("http://PRODUCT-SERVICE/api/products/update/" + pp.getPid()).retrieve().bodyToMono(Object.class).block();
+            }
+
         }
     }
 }

@@ -1,0 +1,12 @@
+server:
+  port: 8081
+
+# Email configurations
+
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: daramaheshdurga123@gmail.com
+    password: qyxczudexofoaqss
+

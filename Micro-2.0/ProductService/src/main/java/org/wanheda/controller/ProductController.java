@@ -26,8 +26,7 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<ProductResponseDto> getAll(@RequestHeader("loggedInUser") String username) {
-        System.out.println("username is " +username);
+    public List<ProductResponseDto> getAll() {
        return productService.getAll();
     }
 

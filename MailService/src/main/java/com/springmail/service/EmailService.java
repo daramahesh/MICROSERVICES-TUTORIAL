@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.UUID;
 
@@ -62,13 +63,18 @@ public class EmailService {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper messageHelper = new MimeMessageHelper(message);
 
-        String password = randomGeneratedPassword();
+        String password = generateRandomPassword(10,48,122);
 
+        System.out.println(password);
         messageHelper.setText("your reset password is" + password);
         messageHelper.setTo(mailRequestDto.getTo());
         messageHelper.setSubject(mailRequestDto.getSubject());
 
-        javaMailSender.send(message);
+        SimpleMailMessage mail=new SimpleMailMessage();
+        mail.setTo(mailRequestDto.getTo());
+        mail.setSubject(mailRequestDto.getSubject());
+        mail.setText("your reset password is " + password);
+        javaMailSender.send(mail);
         return "reset password has been sent to your mail";
 
     }
@@ -76,5 +82,12 @@ public class EmailService {
     public String randomGeneratedPassword() {
         String password = UUID.randomUUID().toString();
         return password.substring(0, 8);
+    }
+
+    public static String generateRandomPassword(int len, int randNumOrigin, int randNumBound) {
+        SecureRandom random = new SecureRandom();
+        return random.ints(randNumOrigin, randNumBound + 1)
+                .filter(i -> Character.isAlphabetic(i) || Character.isDigit(i)).limit(len)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
     }
 }

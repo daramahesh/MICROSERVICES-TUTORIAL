@@ -1,0 +1,17 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: NOTIFICATION-SERVICE
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: notification-id
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: org.wanheda.event

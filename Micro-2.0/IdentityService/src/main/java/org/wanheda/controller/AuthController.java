@@ -35,4 +35,10 @@ public class AuthController {
         this.authService.validateToken(token);
         return "token is valid";
     }
+
+    @PostMapping("/create-user")
+    public String createUser(@RequestBody UserInfo userInfo) {
+        authService.createUser(userInfo);
+        return "user is created";
+    }
 }

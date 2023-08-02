@@ -17,7 +17,7 @@ public class OrderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @CircuitBreaker(name = "orderBreaker", fallbackMethod = "temp")
+    //@CircuitBreaker(name = "orderBreaker", fallbackMethod = "temp")
     //@Retry(name = "retry",fallbackMethod = "temp")
     public String placeOrder(@RequestBody OrderRequestDto orderRequestDto) {
         this.orderService.placeOrder(orderRequestDto);

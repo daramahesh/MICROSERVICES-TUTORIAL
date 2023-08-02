@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "micro_product")
+@Table(name = "micro_products")
 public class Product {
 
     @Id

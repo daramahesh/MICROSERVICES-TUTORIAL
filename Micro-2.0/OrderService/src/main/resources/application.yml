@@ -3,8 +3,8 @@ server:
 
 spring:
   datasource:
-    driver-class-name: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1521:xe
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/microservices
     username: mahesh
     password: mahesh
   jpa:
@@ -12,10 +12,23 @@ spring:
       hibernate:
       format-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     show-sql: true
   application:
     name: ORDER-SERVICE
+  kafka:
+    bootstrap-servers: localhost:9092
+    template:
+      default-topic: orderNotification
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    properties:
+      spring:
+        json:
+          type:
+            mapping:
+              event: org.wanheda.event.OrderPlacedEvent
 
 management:
   health:
@@ -49,3 +62,5 @@ resilience4j:
       orderBreaker:
         maxAttempts: 3
         waitDuration: 5s
+
+

@@ -1,6 +1,8 @@
 package org.wanheda.serviceimpl;
 
+import org.wanheda.event.OrderPlacedEvent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.wanheda.dto.OrderRequestDto;
@@ -12,14 +14,14 @@ import org.wanheda.service.OrderService;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
-
+    @Autowired
+    private KafkaTemplate<String, OrderPlacedEvent> template;
     @Autowired
     private WebClient webClient;
     @Override
@@ -30,12 +32,12 @@ public class OrderServiceImpl implements OrderService {
             List<Product> productList = Arrays.asList(products);
 
             List<Order> list = new ArrayList<>();
-
+            Order order = new Order();
             for (Product p : productList) {
 
                 if (p.getName().equals(orderRequestDto.getOrderDetails()) && p.getQuantity() > 0) {
 
-                    Order order = new Order();
+
                     order.setOrderDetails(p.getName());
                     order.setPid(p.getPid());
                     list.add(order);
@@ -46,9 +48,10 @@ public class OrderServiceImpl implements OrderService {
                 throw new NullPointerException("out of stock");
             } else {
                 this.orderRepository.saveAll(list);
-                for (Product pp : productList) {
-                    Object block = webClient.put().uri("http://PRODUCT-SERVICE/api/products/update/" + pp.getPid()).retrieve().bodyToMono(Object.class).block();
-                }
+                template.send("orderNotification", new OrderPlacedEvent(order.getOrderId()));
+
+                    Object block = webClient.put().uri("http://PRODUCT-SERVICE/api/products/update/" + order.getPid()).retrieve().bodyToMono(Object.class).block();
+
 
             }
         }

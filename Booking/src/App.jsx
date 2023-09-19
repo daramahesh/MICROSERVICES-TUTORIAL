@@ -6,6 +6,8 @@ import {
 import Home from "./pages/home/Home";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
+import List from "./pages/list/List";
+import Hotel from "./pages/hotel/Hotel";
 
 function App() {
 
@@ -27,6 +29,14 @@ function App() {
         {
           path: "/",
           element: <Home />
+        },
+        {
+          path: "/hotels",
+          element: <List />
+        },
+        {
+          path: "/hotel/:id",
+          element: <Hotel />
         }
       ]
     },

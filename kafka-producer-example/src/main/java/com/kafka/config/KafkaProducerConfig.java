@@ -1,3 +1,4 @@
+/*
 package com.kafka.config;
 
 import org.apache.kafka.clients.admin.NewTopic;
@@ -11,3 +12,4 @@ public class KafkaProducerConfig {
         return new NewTopic("kafka-demo-5",3,(short)1);
     }
 }
+*/

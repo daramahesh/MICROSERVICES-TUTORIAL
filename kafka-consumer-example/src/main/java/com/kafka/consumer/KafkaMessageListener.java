@@ -1,6 +1,6 @@
-package com.javatechie.consumer;
+package com.kafka.consumer;
 
-import com.javatechie.dto.Customer;
+import com.kafka.dto.Customer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;

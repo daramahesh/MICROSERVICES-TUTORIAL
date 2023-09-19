@@ -1,5 +1,8 @@
 spring:
   kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     consumer:
       bootstrap-servers: localhost:9092
       group-id: ce-group
@@ -10,8 +13,3 @@ spring:
           json:
             trusted:
               packages : com.kafka.dto
-
-
-
-server:
-  port: 9292

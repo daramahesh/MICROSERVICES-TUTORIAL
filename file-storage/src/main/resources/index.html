@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Title of the document</title>
+<script>
+
+ var apiUrl = 'http://localhost:8080/download-all-images';
+
+ 
+    fetch(apiUrl).then(response => {
+      return response.json();
+    }).then(data => {
+        console.log(data);
+         let arr=[]
+         for(let i=0;i<data.result.imageList.length;i++){
+           let kk1={"id":"","byteArray":""}
+           kk1.id=i
+           kk1.byteArray=data.result.imageList[i]
+           arr.push(kk1);
+         }
+         console.log(arr);
+        const dataUri = `data:image/png;base64,${arr[0].byteArray}`;
+        const dataUri1 = `data:image/png;base64,${arr[1].byteArray}`;
+        const dataUri2 = `data:image/png;base64,${arr[2].byteArray}`;
+        const dataUri3 = `data:image/png;base64,${arr[3].byteArray}`;
+        const dataUri4 = `data:image/png;base64,${arr[4].byteArray}`;
+        const dataUri5 = `data:image/png;base64,${arr[5].byteArray}`;
+        const dataUri6 = `data:image/png;base64,${arr[6].byteArray}`;
+        const dataUri7 = `data:image/png;base64,${arr[7].byteArray}`;
+
+        const imageElement = document.getElementById("imageElement");
+        const imageElement1 = document.getElementById("imageElement1");
+        const imageElement2 = document.getElementById("imageElement2");
+        const imageElement3 = document.getElementById("imageElement3");
+        const imageElement4 = document.getElementById("imageElement4");
+        const imageElement5 = document.getElementById("imageElement5");
+        const imageElement6 = document.getElementById("imageElement6");
+        const imageElement7 = document.getElementById("imageElement7");
+        imageElement.src = dataUri;
+        imageElement1.src = dataUri1;
+        imageElement2.src = dataUri2;
+        imageElement3.src = dataUri3;
+        imageElement4.src = dataUri4;
+        imageElement5.src = dataUri5;
+        imageElement6.src = dataUri6;
+        imageElement7.src = dataUri7;
+
+        
+    }).catch(err => {
+
+    });
+    
+</script>
+
+</head>
+<body>
+
+<h1>This is a heading</h1>
+<img style="height: 400px;width: 700px;"  id="imageElement" src="" alt="Image from Byte Array">
+<img style="height: 400px;width: 700px;"  id="imageElement1" src="" alt="Image from Byte Array">
+<img style="height: 400px;width: 700px;"  id="imageElement2" src="" alt="Image from Byte Array">
+<img style="height: 400px;width: 700px;"  id="imageElement3" src="" alt="Image from Byte Array">
+<img style="height: 400px;width: 700px;"  id="imageElement4" src="" alt="Image from Byte Array">
+<img style="height: 400px;width: 700px;"  id="imageElement5" src="" alt="Image from Byte Array">
+<img style="height: 400px;width: 700px;"  id="imageElement6" src="" alt="Image from Byte Array">
+<img style="height: 400px;width: 700px;"  id="imageElement7" src="" alt="Image from Byte Array">
+</body>
+</html>

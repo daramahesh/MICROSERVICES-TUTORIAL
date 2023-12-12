@@ -1,0 +1,15 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: QUIZ-SERVICE
+  datasource:
+    url: jdbc:mysql://localhost:3306/quiz
+    username: mahesh
+    password: mahesh
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update

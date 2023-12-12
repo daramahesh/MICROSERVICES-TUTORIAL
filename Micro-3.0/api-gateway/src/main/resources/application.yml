@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: API-GATEWAY
+
+  cloud:
+    gateway:
+      routes:
+        - id: QUESTION-SERVICE
+          uri: lb://QUESTION-SERVICE
+          predicates:
+            - Path=/question/**
+
+        - id: QUIZ-SERVICE
+          uri: lb://QUIZ-SERVICE
+          predicates:
+            - Path=/quiz/**
